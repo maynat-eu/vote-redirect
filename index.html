@@ -2,10 +2,103 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://minecraft-mp.com/server/362361/vote/">
-    <title>Redirecționare...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Redirecționare – MAYNAT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --accent-color: #00d4ff; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a12;
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 30% 40%, var(--accent-color) 15%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, var(--accent-color) 10%, transparent 60%);
+            opacity: 0.15;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .logo {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 0 40px var(--accent-color));
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 2.4rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 20%, var(--accent-color) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .message {
+            font-size: 1.1rem;
+            color: rgba(200, 215, 255, 0.7);
+            line-height: 1.7;
+        }
+        .loader { display: flex; gap: 12px; margin-top: 6px; }
+        .loader span {
+            display: block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            animation: dotBounce 1.4s ease-in-out infinite both;
+            box-shadow: 0 0 30px var(--accent-color);
+        }
+        .loader span:nth-child(1) { animation-delay: -0.32s; }
+        .loader span:nth-child(2) { animation-delay: -0.16s; }
+        .loader span:nth-child(3) { animation-delay: 0s; }
+        @keyframes dotBounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <p>Dacă nu ești redirecționat automat, <a href="https://minecraft-mp.com/server/362361/vote/">apasă aici</a>.</p>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <img src="https://maynat.ct.ws/images/logo.png" alt="Logo" class="logo">
+        <h1>Te redirecționăm...</h1>
+        <div class="message">Ești trimis automat către pagina de vot MAYNAT.EU</div>
+        <div class="loader">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <script>
+        // Redirecționare automată după 2 secunde pentru a permite vizualizarea designului
+        setTimeout(function() {
+            window.location.href = "https://minecraft-mp.com/server/362361/vote/";
+        }, 1000);
+    </script>
 </body>
 </html>
