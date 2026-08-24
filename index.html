@@ -16,7 +16,7 @@
 
     <style>
         /* ============================================================
-           TOKENS — abis albastru + sticlă lichidă
+           TOKENS — același design liquid glass
            ============================================================ */
         :root {
             --deep: #040f1f;
@@ -37,14 +37,8 @@
             --font-pixel: 'Press Start 2P', monospace;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--deep);
@@ -60,14 +54,8 @@
             padding: 20px;
         }
 
-        ::-webkit-scrollbar {
-            width: 10px;
-            background: var(--deep);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--core);
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 10px; background: var(--deep); }
+        ::-webkit-scrollbar-thumb { background: var(--core); border-radius: 10px; }
 
         /* ============================================================
            BACKDROP — abis + valuri aurorale
@@ -117,19 +105,11 @@
             animation-delay: -11s;
         }
         @keyframes drift {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(40px, -30px) scale(1.08);
-            }
-            66% {
-                transform: translate(-30px, 25px) scale(0.95);
-            }
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(40px,-30px) scale(1.08); }
+            66% { transform: translate(-30px,25px) scale(0.95); }
         }
 
-        /* Bubbles */
         .bubbles {
             position: fixed;
             inset: 0;
@@ -141,29 +121,19 @@
             position: absolute;
             bottom: -40px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5), rgba(143, 233, 255, 0.05) 70%);
-            border: 1px solid rgba(180, 225, 255, 0.25);
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), rgba(143,233,255,0.05) 70%);
+            border: 1px solid rgba(180,225,255,0.25);
             animation: rise linear infinite;
         }
         @keyframes rise {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: .7;
-            }
-            90% {
-                opacity: .5;
-            }
-            100% {
-                transform: translateY(-110vh) translateX(20px);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0); opacity:0; }
+            10% { opacity:.7; }
+            90% { opacity:.5; }
+            100% { transform: translateY(-110vh) translateX(20px); opacity:0; }
         }
 
         /* ============================================================
-           LIQUID GLASS — panoul de bază
+           LIQUID GLASS
            ============================================================ */
         .glass {
             position: relative;
@@ -173,9 +143,9 @@
             backdrop-filter: blur(22px) saturate(160%);
             -webkit-backdrop-filter: blur(22px) saturate(160%);
             box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                inset 0 -12px 24px -18px rgba(0, 0, 0, 0.5),
-                0 18px 40px -18px rgba(0, 10, 25, 0.65);
+                inset 0 1px 0 rgba(255,255,255,0.25),
+                inset 0 -12px 24px -18px rgba(0,0,0,0.5),
+                0 18px 40px -18px rgba(0,10,25,0.65);
             overflow: hidden;
         }
         .glass::before {
@@ -183,7 +153,7 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
-            background: linear-gradient(120deg, rgba(255, 255, 255, 0.16) 0%, transparent 30%);
+            background: linear-gradient(120deg, rgba(255,255,255,0.16) 0%, transparent 30%);
             mix-blend-mode: screen;
         }
         .glass::after {
@@ -193,35 +163,26 @@
             left: -20%;
             width: 60%;
             height: 180%;
-            background: linear-gradient(75deg, transparent 30%, rgba(255, 255, 255, 0.16) 46%, rgba(255, 255, 255, 0.02) 52%, transparent 70%);
+            background: linear-gradient(75deg, transparent 30%, rgba(255,255,255,0.16) 46%, rgba(255,255,255,0.02) 52%, transparent 70%);
             transform: rotate(8deg);
             animation: sheen 7s ease-in-out infinite;
             pointer-events: none;
         }
         @keyframes sheen {
-            0%,
-            100% {
-                left: -30%;
-            }
-            50% {
-                left: 120%;
-            }
+            0%, 100% { left: -30%; }
+            50% { left: 120%; }
         }
 
         /* ============================================================
-           CONTAINER
+           CONTAINER & CARD
            ============================================================ */
         .container {
             position: relative;
             z-index: 10;
             max-width: 520px;
             width: 100%;
-            padding: 0 4px;
         }
 
-        /* ============================================================
-           CARD PRINCIPAL
-           ============================================================ */
         .vote-card {
             padding: 48px 40px 44px;
             text-align: center;
@@ -236,24 +197,19 @@
             width: 72px;
             height: 72px;
             border-radius: 24px;
-            background: linear-gradient(155deg, rgba(143, 233, 255, 0.35), rgba(26, 111, 214, 0.35));
+            background: linear-gradient(155deg, rgba(143,233,255,0.35), rgba(26,111,214,0.35));
             border: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 32px;
             color: var(--ice);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 0 40px rgba(79, 179, 255, 0.15);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 0 40px rgba(79,179,255,0.15);
             animation: floatLogo 5s ease-in-out infinite;
         }
         @keyframes floatLogo {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .vote-card h1 {
@@ -281,11 +237,10 @@
         }
 
         /* ============================================================
-           PROGRES / TIMER
+           TIMER — simplu, doar bara de progres
            ============================================================ */
         .timer-wrap {
             margin: 20px 0 28px;
-            position: relative;
         }
         .timer-bar-bg {
             height: 6px;
@@ -300,8 +255,8 @@
             width: 100%;
             border-radius: 999px;
             background: linear-gradient(90deg, var(--sky), var(--ice));
-            box-shadow: 0 0 20px rgba(79, 179, 255, 0.3);
-            transition: width 0.3s linear;
+            box-shadow: 0 0 20px rgba(79,179,255,0.3);
+            transition: width 0.1s linear;
         }
         .timer-text {
             margin-top: 10px;
@@ -313,19 +268,6 @@
         .timer-text strong {
             color: var(--ink-dim);
             font-weight: 700;
-        }
-        .timer-text .stop-badge {
-            display: inline-block;
-            background: rgba(255, 77, 77, 0.15);
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 77, 77, 0.2);
-            border-radius: 999px;
-            padding: 2px 14px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-left: 8px;
         }
 
         /* ============================================================
@@ -357,18 +299,13 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--gold), #ffb04d);
             color: #04162c;
-            box-shadow: 0 10px 26px -8px rgba(255, 210, 122, 0.5), inset 0 1px 0 rgba(255, 255, 255, .55);
+            box-shadow: 0 10px 26px -8px rgba(255,210,122,0.5), inset 0 1px 0 rgba(255,255,255,.55);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 32px -8px rgba(255, 210, 122, 0.7), inset 0 1px 0 rgba(255, 255, 255, .55);
+            box-shadow: 0 14px 32px -8px rgba(255,210,122,0.7), inset 0 1px 0 rgba(255,255,255,.55);
         }
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-        .btn-primary i {
-            color: #04162c;
-        }
+        .btn-primary i { color: #04162c; }
 
         .btn-secondary {
             background: var(--glass-2);
@@ -378,43 +315,17 @@
         }
         .btn-secondary:hover {
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.14);
-        }
-        .btn-secondary i {
-            color: var(--ink-mute);
-        }
-
-        .btn-stop {
-            background: rgba(255, 77, 77, 0.12);
-            color: #ff6b6b;
-            border-color: rgba(255, 77, 77, 0.2);
-        }
-        .btn-stop:hover {
-            background: rgba(255, 77, 77, 0.22);
-            transform: translateY(-2px);
-        }
-        .btn-stop i {
-            color: #ff6b6b;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--sky), var(--core));
-            color: #04162c;
-            box-shadow: 0 10px 26px -8px rgba(79, 179, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, .55);
-        }
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 32px -8px rgba(79, 179, 255, 0.7), inset 0 1px 0 rgba(255, 255, 255, .55);
+            background: rgba(255,255,255,0.14);
         }
 
         /* ============================================================
-           LINK DE VOT + COPY
+           LINK + COPY
            ============================================================ */
         .vote-link-box {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(4, 16, 31, 0.5);
+            background: rgba(4,16,31,0.5);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 10px 12px 10px 18px;
@@ -440,47 +351,11 @@
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 16px -6px rgba(79, 179, 255, 0.5);
+            box-shadow: 0 6px 16px -6px rgba(79,179,255,0.5);
             transition: transform .15s;
             flex-shrink: 0;
         }
-        .vote-link-box .btn-copy:hover {
-            transform: scale(1.04);
-        }
-
-        /* ============================================================
-           STATUS / STOP MODE
-           ============================================================ */
-        .stop-notice {
-            display: none;
-            background: rgba(255, 210, 122, 0.08);
-            border: 1px solid rgba(255, 210, 122, 0.2);
-            border-radius: 16px;
-            padding: 14px 20px;
-            margin-top: 14px;
-            color: var(--gold);
-            font-size: 0.92rem;
-            font-weight: 500;
-        }
-        .stop-notice i {
-            margin-right: 8px;
-        }
-
-        .stop-notice.active {
-            display: block;
-            animation: fadeIn .5s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .vote-link-box .btn-copy:hover { transform: scale(1.04); }
 
         /* ============================================================
            TOAST
@@ -490,15 +365,14 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
-            background: rgba(4, 16, 31, 0.92);
+            background: rgba(4,16,31,0.92);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 14px 28px;
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(79, 179, 255, 0.08);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 30px rgba(79,179,255,0.08);
             color: var(--ink);
-            font-family: var(--font-body);
             font-weight: 500;
             font-size: 0.95rem;
             display: flex;
@@ -518,13 +392,8 @@
             transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
-        .toast .toast-icon {
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-        .toast .toast-msg {
-            flex: 1;
-        }
+        .toast .toast-icon { font-size: 1.4rem; flex-shrink: 0; }
+        .toast .toast-msg { flex: 1; }
         .toast .toast-close {
             background: none;
             border: none;
@@ -535,9 +404,7 @@
             transition: color 0.2s;
             padding: 0 4px;
         }
-        .toast .toast-close:hover {
-            color: var(--ink);
-        }
+        .toast .toast-close:hover { color: var(--ink); }
         .toast-progress {
             position: absolute;
             bottom: 0;
@@ -549,16 +416,12 @@
             animation: shrink 3s linear forwards;
         }
         @keyframes shrink {
-            from {
-                width: 100%;
-            }
-            to {
-                width: 0%;
-            }
+            from { width: 100%; }
+            to { width: 0%; }
         }
 
         /* ============================================================
-           FOOTER MIC
+           FOOTER
            ============================================================ */
         .foot-note {
             margin-top: 18px;
@@ -571,63 +434,27 @@
             color: var(--ink-dim);
             text-decoration: none;
         }
-        .foot-note a:hover {
-            text-decoration: underline;
-        }
+        .foot-note a:hover { text-decoration: underline; }
 
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 560px) {
-            .vote-card {
-                padding: 32px 20px 30px;
-            }
-            .vote-card h1 {
-                font-size: 2.0rem;
-            }
-            .logo-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 26px;
-            }
-            .btn {
-                font-size: 0.9rem;
-                padding: 13px 20px;
-            }
-            .vote-link-box {
-                flex-wrap: wrap;
-                padding: 10px 14px;
-            }
-            .vote-link-box .link-text {
-                font-size: 0.72rem;
-                flex: 1 1 100%;
-                text-align: center;
-            }
-            .vote-link-box .btn-copy {
-                width: 100%;
-                justify-content: center;
-            }
+            .vote-card { padding: 32px 20px 30px; }
+            .vote-card h1 { font-size: 2.0rem; }
+            .logo-icon { width: 60px; height: 60px; font-size: 26px; }
+            .btn { font-size: 0.9rem; padding: 13px 20px; }
+            .vote-link-box { flex-wrap: wrap; padding: 10px 14px; }
+            .vote-link-box .link-text { font-size: 0.72rem; flex: 1 1 100%; text-align: center; }
+            .vote-link-box .btn-copy { width: 100%; justify-content: center; }
         }
-
         @media (max-width: 400px) {
-            .vote-card h1 {
-                font-size: 1.6rem;
-            }
-            .vote-card .subtitle {
-                font-size: 0.9rem;
-            }
-            .timer-text {
-                font-size: 0.75rem;
-            }
+            .vote-card h1 { font-size: 1.6rem; }
+            .vote-card .subtitle { font-size: 0.9rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .blob,
-            .bubble,
-            .glass::after,
-            .logo-icon {
-                animation: none !important;
-            }
+            .blob, .bubble, .glass::after, .logo-icon { animation: none !important; }
         }
     </style>
 </head>
@@ -641,7 +468,6 @@
     <div class="bubbles" id="bubbleField"></div>
 
     <div class="container">
-
         <div class="vote-card glass">
 
             <!-- Logo -->
@@ -649,22 +475,20 @@
                 <div class="logo-icon"><i class="fas fa-star"></i></div>
             </div>
 
-            <!-- Titlu -->
             <h1>Votează <span class="accent">MAYNAT</span></h1>
-            <p class="subtitle">Susține serverul cu un vot — durează 10 secunde</p>
+            <p class="subtitle">Susține serverul – redirecționare în 1 secundă</p>
 
             <!-- Timer / Progress -->
-            <div class="timer-wrap" id="timerWrap">
+            <div class="timer-wrap">
                 <div class="timer-bar-bg">
                     <div class="timer-bar" id="timerBar" style="width:100%"></div>
                 </div>
                 <div class="timer-text" id="timerText">
-                    Redirecționare în <strong id="countdownNum">3</strong> secunde...
-                    <span class="stop-badge"><i class="fas fa-pause"></i> oprire?</span>
+                    Redirecționare în <strong id="countdownNum">1</strong> secundă...
                 </div>
             </div>
 
-            <!-- Link de vot + Copy -->
+            <!-- Link + Copy -->
             <div class="vote-link-box">
                 <span class="link-text" id="voteLinkDisplay">https://minecraft-mp.com/server/362361/vote/</span>
                 <button class="btn-copy" id="copyVoteBtn"><i class="fas fa-copy"></i> Copiază</button>
@@ -675,14 +499,6 @@
                 <a href="https://minecraft-mp.com/server/362361/vote/" target="_blank" class="btn btn-primary" id="voteNowBtn">
                     <i class="fas fa-arrow-right"></i> Votează acum
                 </a>
-                <button class="btn btn-secondary" id="stopRedirectBtn">
-                    <i class="fas fa-ban"></i> Oprește redirecționarea
-                </button>
-            </div>
-
-            <!-- Notificare stop -->
-            <div class="stop-notice" id="stopNotice">
-                <i class="fas fa-shield-alt"></i> Redirecționarea a fost oprită. Poți vota manual mai sus.
             </div>
 
             <div class="foot-note">
@@ -690,7 +506,6 @@
                 Fiecare vot contează — <a href="https://maynat.ct.ws">maynat.eu</a>
             </div>
         </div>
-
     </div>
 
     <!-- TOAST -->
@@ -726,23 +541,15 @@
             // 2. CONFIG
             // ============================================================
             const VOTE_URL = 'https://minecraft-mp.com/server/362361/vote/';
-            const REDIRECT_DELAY = 3; // secunde
-
-            // Verifică dacă URL-ul conține ?stop
-            const urlParams = new URLSearchParams(window.location.search);
-            const stopMode = urlParams.has('stop') || urlParams.has('stop') || window.location.href.includes('?stop');
+            const REDIRECT_DELAY = 1; // secundă
 
             // Elemente
             const timerBar = document.getElementById('timerBar');
             const countdownNum = document.getElementById('countdownNum');
             const timerText = document.getElementById('timerText');
-            const stopNotice = document.getElementById('stopNotice');
-            const stopBtn = document.getElementById('stopRedirectBtn');
-            const voteNowBtn = document.getElementById('voteNowBtn');
             const copyBtn = document.getElementById('copyVoteBtn');
             const voteLinkDisplay = document.getElementById('voteLinkDisplay');
 
-            // Setează linkul afișat
             voteLinkDisplay.textContent = VOTE_URL;
 
             // ============================================================
@@ -802,119 +609,45 @@
             // 5. TIMER + REDIRECT
             // ============================================================
             let countdown = REDIRECT_DELAY;
-            let timerInterval = null;
-            let redirectTimeout = null;
-            let isStopped = stopMode;
 
             function updateTimerUI() {
                 const progress = (countdown / REDIRECT_DELAY) * 100;
                 timerBar.style.width = progress + '%';
-                countdownNum.textContent = countdown;
+                countdownNum.textContent = Math.ceil(countdown);
 
                 if (countdown <= 0) {
                     timerBar.style.width = '0%';
-                    timerText.innerHTML =
-                        'Redirecționare... <strong style="color:var(--gold);">acum!</strong>';
+                    timerText.innerHTML = 'Redirecționare... <strong style="color:var(--gold);">acum!</strong>';
                 } else {
                     timerText.innerHTML =
-                        `Redirecționare în <strong id="countdownNum">${countdown}</strong> secunde... <span class="stop-badge"><i class="fas fa-pause"></i> oprire?</span>`;
+                        `Redirecționare în <strong id="countdownNum">${Math.ceil(countdown)}</strong> secundă...`;
                 }
             }
 
             function startTimer() {
-                if (isStopped) {
-                    timerBar.style.width = '100%';
-                    timerText.innerHTML =
-                        '<span style="color:var(--ink-mute);"><i class="fas fa-pause-circle"></i> Redirecționare oprită</span>';
-                    stopNotice.classList.add('active');
-                    return;
-                }
-
                 countdown = REDIRECT_DELAY;
                 updateTimerUI();
 
-                if (timerInterval) clearInterval(timerInterval);
-                if (redirectTimeout) clearTimeout(redirectTimeout);
-
-                timerInterval = setInterval(() => {
-                    countdown -= 0.2;
+                const interval = setInterval(() => {
+                    countdown -= 0.1;
                     if (countdown <= 0) {
                         countdown = 0;
                         updateTimerUI();
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-
-                        // Redirecționează
-                        redirectTimeout = setTimeout(() => {
+                        clearInterval(interval);
+                        // Redirect after a tiny delay
+                        setTimeout(() => {
                             window.location.href = VOTE_URL;
-                        }, 300);
+                        }, 200);
                     } else {
                         updateTimerUI();
                     }
-                }, 200);
+                }, 100);
             }
 
-            // ============================================================
-            // 6. STOP
-            // ============================================================
-            function stopRedirect() {
-                if (isStopped) return;
-                isStopped = true;
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                if (redirectTimeout) {
-                    clearTimeout(redirectTimeout);
-                    redirectTimeout = null;
-                }
-                timerBar.style.width = '100%';
-                timerText.innerHTML =
-                    '<span style="color:var(--gold);"><i class="fas fa-pause-circle"></i> Redirecționare oprită</span>';
-                stopNotice.classList.add('active');
-                stopBtn.innerHTML = '<i class="fas fa-check-circle"></i> Oprit ✓';
-                stopBtn.style.background = 'rgba(0,255,136,0.12)';
-                stopBtn.style.color = '#7dffb5';
-                stopBtn.style.borderColor = 'rgba(0,255,136,0.2)';
-                showToast('Redirecționare oprită!', '⏹️');
-            }
-
-            stopBtn.addEventListener('click', stopRedirect);
+            startTimer();
 
             // ============================================================
-            // 7. PORNIRE
-            // ============================================================
-            if (stopMode) {
-                // Dacă s-a dat ?stop, oprește din start
-                isStopped = true;
-                timerBar.style.width = '100%';
-                timerText.innerHTML =
-                    '<span style="color:var(--gold);"><i class="fas fa-pause-circle"></i> Redirecționare oprită (mod stop)</span>';
-                stopNotice.classList.add('active');
-                stopBtn.innerHTML = '<i class="fas fa-check-circle"></i> Oprit ✓';
-                stopBtn.style.background = 'rgba(0,255,136,0.12)';
-                stopBtn.style.color = '#7dffb5';
-                stopBtn.style.borderColor = 'rgba(0,255,136,0.2)';
-                // Afișează notificarea cu text specific
-                stopNotice.innerHTML =
-                    '<i class="fas fa-shield-alt"></i> Mod <strong>?stop</strong> activ — redirecționarea este dezactivată.';
-            } else {
-                startTimer();
-            }
-
-            // Dacă utilizatorul dă click pe "Votează acum", oprește timerul
-            voteNowBtn.addEventListener('click', function(e) {
-                // Nu opri redirecționarea, dar dă-i drumul să meargă
-                // Utilizatorul a ales să voteze manual, dar lăsăm timerul să continue
-                // Doar dacă e oprit, nu face nimic
-                if (!isStopped) {
-                    // Dacă nu e oprit, lasă timerul să meargă, dar utilizatorul pleacă spre vot
-                    // Nu facem nimic special, doar navighează
-                }
-            });
-
-            // ============================================================
-            // 8. SMOOTH SCROLL
+            // 6. SMOOTH SCROLL
             // ============================================================
             document.querySelectorAll('a[href^="#"]').forEach(a => {
                 a.addEventListener('click', function(e) {
@@ -926,8 +659,7 @@
                 });
             });
 
-            console.log('🌊 MAYNAT · Vote — design liquid glass, redirect după ' + REDIRECT_DELAY +
-                's, ?stop = oprire');
+            console.log('🌊 MAYNAT · Vote — redirecționare după ' + REDIRECT_DELAY + 's, fără oprire');
 
         })();
     </script>
