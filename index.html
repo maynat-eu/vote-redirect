@@ -2,728 +2,98 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MAYNAT · Votează</title>
 
-    <!-- ICOANE -->
     <link rel="icon" type="image/png" href="https://www.maynat.eu/images/logo.png" />
-    <link rel="shortcut icon" href="https://www.maynat.eu/images/logo.png" />
-    <link rel="apple-touch-icon" href="https://www.maynat.eu/images/logo.png" />
-
-    <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
-        /* ============================================================
-           TOKENS — același design liquid glass
-           ============================================================ */
-        :root {
-            --deep: #040f1f;
-            --deep-2: #071e38;
-            --mid: #0c2f52;
-            --ice: #8fe9ff;
-            --sky: #4fb3ff;
-            --core: #1a6fd6;
-            --gold: #ffd27a;
-            --ink: #eef7ff;
-            --ink-dim: #a9c6df;
-            --ink-mute: #6f90ab;
-            --glass: rgba(255, 255, 255, 0.06);
-            --glass-2: rgba(255, 255, 255, 0.10);
-            --glass-border: rgba(180, 220, 255, 0.22);
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-pixel: 'Press Start 2P', monospace;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
         body {
-            background: var(--deep);
-            color: var(--ink);
-            font-family: var(--font-body);
-            font-size: 16px;
-            line-height: 1.55;
-            overflow-x: hidden;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            background: #0b0f14;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 24px;
         }
 
-        ::-webkit-scrollbar { width: 10px; background: var(--deep); }
-        ::-webkit-scrollbar-thumb { background: var(--core); border-radius: 10px; }
-
-        /* ============================================================
-           BACKDROP — abis + valuri aurorale
-           ============================================================ */
-        .abyss {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background:
-                radial-gradient(circle at 15% 8%, rgba(79, 179, 255, 0.16), transparent 42%),
-                radial-gradient(circle at 85% 78%, rgba(26, 111, 214, 0.20), transparent 46%),
-                linear-gradient(190deg, var(--deep-2) 0%, var(--deep) 55%, #020a15 100%);
-        }
-        .blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(70px);
-            z-index: 0;
-            opacity: .55;
-            animation: drift 22s ease-in-out infinite;
-        }
-        .blob.b1 {
-            width: 480px;
-            height: 480px;
-            top: -140px;
-            left: -120px;
-            background: radial-gradient(circle, var(--core), transparent 70%);
-            animation-duration: 26s;
-        }
-        .blob.b2 {
-            width: 420px;
-            height: 420px;
-            bottom: -160px;
-            right: -100px;
-            background: radial-gradient(circle, var(--sky), transparent 70%);
-            animation-duration: 19s;
-            animation-delay: -6s;
-        }
-        .blob.b3 {
-            width: 300px;
-            height: 300px;
-            top: 38%;
-            right: 12%;
-            background: radial-gradient(circle, var(--ice), transparent 70%);
-            opacity: .28;
-            animation-duration: 24s;
-            animation-delay: -11s;
-        }
-        @keyframes drift {
-            0%, 100% { transform: translate(0,0) scale(1); }
-            33% { transform: translate(40px,-30px) scale(1.08); }
-            66% { transform: translate(-30px,25px) scale(0.95); }
-        }
-
-        .bubbles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .bubble {
-            position: absolute;
-            bottom: -40px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), rgba(143,233,255,0.05) 70%);
-            border: 1px solid rgba(180,225,255,0.25);
-            animation: rise linear infinite;
-        }
-        @keyframes rise {
-            0% { transform: translateY(0) translateX(0); opacity:0; }
-            10% { opacity:.7; }
-            90% { opacity:.5; }
-            100% { transform: translateY(-110vh) translateX(20px); opacity:0; }
-        }
-
-        /* ============================================================
-           LIQUID GLASS
-           ============================================================ */
-        .glass {
-            position: relative;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            backdrop-filter: blur(22px) saturate(160%);
-            -webkit-backdrop-filter: blur(22px) saturate(160%);
-            box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.25),
-                inset 0 -12px 24px -18px rgba(0,0,0,0.5),
-                0 18px 40px -18px rgba(0,10,25,0.65);
-            overflow: hidden;
-        }
-        .glass::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background: linear-gradient(120deg, rgba(255,255,255,0.16) 0%, transparent 30%);
-            mix-blend-mode: screen;
-        }
-        .glass::after {
-            content: "";
-            position: absolute;
-            top: -40%;
-            left: -20%;
-            width: 60%;
-            height: 180%;
-            background: linear-gradient(75deg, transparent 30%, rgba(255,255,255,0.16) 46%, rgba(255,255,255,0.02) 52%, transparent 70%);
-            transform: rotate(8deg);
-            animation: sheen 7s ease-in-out infinite;
-            pointer-events: none;
-        }
-        @keyframes sheen {
-            0%, 100% { left: -30%; }
-            50% { left: 120%; }
-        }
-
-        /* ============================================================
-           CONTAINER & CARD
-           ============================================================ */
-        .container {
-            position: relative;
-            z-index: 10;
-            max-width: 520px;
-            width: 100%;
-        }
-
-        .vote-card {
-            padding: 48px 40px 44px;
+        .box {
             text-align: center;
+            max-width: 420px;
+            width: 100%;
         }
 
-        .logo-wrap {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 18px;
-        }
-        .logo-icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 24px;
-            background: linear-gradient(155deg, rgba(143,233,255,0.35), rgba(26,111,214,0.35));
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: var(--ice);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 0 40px rgba(79,179,255,0.15);
-            animation: floatLogo 5s ease-in-out infinite;
-            overflow: hidden;
-        }
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
+        .logo {
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-        }
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .vote-card h1 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 2.6rem;
-            letter-spacing: -1px;
-            background: linear-gradient(180deg, #ffffff, var(--ink-dim) 140%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 6px;
-        }
-        .vote-card h1 .accent {
-            background: linear-gradient(120deg, var(--gold), #ffb04d);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .vote-card .subtitle {
-            color: var(--ink-mute);
-            font-size: 1.05rem;
             margin-bottom: 24px;
+            opacity: 0.9;
         }
 
-        /* ============================================================
-           TIMER — simplu, doar bara de progres
-           ============================================================ */
-        .timer-wrap {
-            margin: 20px 0 28px;
-        }
-        .timer-bar-bg {
-            height: 6px;
-            border-radius: 999px;
-            background: var(--glass-2);
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            position: relative;
-        }
-        .timer-bar {
-            height: 100%;
-            width: 100%;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--sky), var(--ice));
-            box-shadow: 0 0 20px rgba(79,179,255,0.3);
-            transition: width 0.1s linear;
-        }
-        .timer-text {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: var(--ink-mute);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        .timer-text strong {
-            color: var(--ink-dim);
-            font-weight: 700;
-        }
-
-        /* ============================================================
-           BUTOANE
-           ============================================================ */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 6px;
-        }
-        .btn {
-            font-family: var(--font-body);
-            font-size: 1rem;
+        h1 {
+            font-size: 1.5rem;
             font-weight: 600;
-            padding: 15px 26px;
-            border-radius: 999px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: transform .18s ease, box-shadow .18s ease;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold), #ffb04d);
-            color: #04162c;
-            box-shadow: 0 10px 26px -8px rgba(255,210,122,0.5), inset 0 1px 0 rgba(255,255,255,.55);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 32px -8px rgba(255,210,122,0.7), inset 0 1px 0 rgba(255,255,255,.55);
-        }
-        .btn-primary i { color: #04162c; }
-
-        .btn-secondary {
-            background: var(--glass-2);
-            color: var(--ink);
-            border-color: var(--glass-border);
-            backdrop-filter: blur(14px);
-        }
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            background: rgba(255,255,255,0.14);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
 
-        /* ============================================================
-           LINK + COPY
-           ============================================================ */
-        .vote-link-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(4,16,31,0.5);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 10px 12px 10px 18px;
-            margin: 16px 0 6px;
-        }
-        .vote-link-box .link-text {
-            flex: 1;
-            font-size: 0.82rem;
-            color: var(--ink-dim);
-            font-weight: 500;
-            word-break: break-all;
-            text-align: left;
-            font-family: monospace;
-            letter-spacing: .3px;
-        }
-        .vote-link-box .btn-copy {
-            background: linear-gradient(135deg, var(--sky), var(--core));
-            color: #04162c;
-            border: none;
-            border-radius: 12px;
-            padding: 8px 16px;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 6px 16px -6px rgba(79,179,255,0.5);
-            transition: transform .15s;
-            flex-shrink: 0;
-        }
-        .vote-link-box .btn-copy:hover { transform: scale(1.04); }
-
-        /* ============================================================
-           TOAST
-           ============================================================ */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(4,16,31,0.92);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 14px 28px;
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 30px rgba(79,179,255,0.08);
-            color: var(--ink);
-            font-weight: 500;
+        p {
             font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
-            min-width: 200px;
-            justify-content: center;
-            pointer-events: none;
-        }
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
-        .toast .toast-icon { font-size: 1.4rem; flex-shrink: 0; }
-        .toast .toast-msg { flex: 1; }
-        .toast .toast-close {
-            background: none;
-            border: none;
-            color: var(--ink-mute);
-            font-size: 1.2rem;
-            cursor: pointer;
-            pointer-events: auto;
-            transition: color 0.2s;
-            padding: 0 4px;
-        }
-        .toast .toast-close:hover { color: var(--ink); }
-        .toast-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), #ffb04d);
-            width: 100%;
-            border-radius: 0 0 16px 16px;
-            animation: shrink 3s linear forwards;
-        }
-        @keyframes shrink {
-            from { width: 100%; }
-            to { width: 0%; }
+            color: #8b96a5;
+            line-height: 1.6;
+            margin-bottom: 28px;
         }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
-        .foot-note {
-            margin-top: 18px;
-            font-size: 0.75rem;
-            color: var(--ink-mute);
-            opacity: 0.6;
-            letter-spacing: 0.5px;
-        }
-        .foot-note a {
-            color: var(--ink-dim);
+        .btn {
+            display: inline-block;
+            background: #1f6feb;
+            color: #fff;
             text-decoration: none;
-        }
-        .foot-note a:hover { text-decoration: underline; }
-
-        /* ============================================================
-           MESAJ DE REZERVĂ (fallback)
-           ============================================================ */
-        .fallback-message {
-            margin-top: 16px;
-            padding: 14px 20px;
-            background: rgba(255, 210, 122, 0.08);
-            border: 1px solid rgba(255, 210, 122, 0.3);
-            border-radius: 16px;
-            font-size: 0.9rem;
-            color: var(--gold);
-            font-weight: 500;
-            display: none;
-            animation: fadeIn 0.5s ease;
-            line-height: 1.5;
-        }
-        .fallback-message a {
-            color: var(--gold);
-            text-decoration: underline;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .fallback-message a:hover {
-            color: #ffe4a0;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 13px 32px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.15s ease;
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 560px) {
-            .vote-card { padding: 32px 20px 30px; }
-            .vote-card h1 { font-size: 2.0rem; }
-            .logo-icon { width: 60px; height: 60px; font-size: 26px; }
-            .btn { font-size: 0.9rem; padding: 13px 20px; }
-            .vote-link-box { flex-wrap: wrap; padding: 10px 14px; }
-            .vote-link-box .link-text { font-size: 0.72rem; flex: 1 1 100%; text-align: center; }
-            .vote-link-box .btn-copy { width: 100%; justify-content: center; }
-            .fallback-message { font-size: 0.8rem; padding: 12px 16px; }
-        }
-        @media (max-width: 400px) {
-            .vote-card h1 { font-size: 1.6rem; }
-            .vote-card .subtitle { font-size: 0.9rem; }
+        .btn:hover {
+            background: #2a7fff;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .blob, .bubble, .glass::after, .logo-icon { animation: none !important; }
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #1f2a37;
+            border-top-color: #1f6feb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
+
+    <!-- REDIRECȚIONARE INSTANTĂ -->
+    <script>
+        window.location.replace('https://minecraft-mp.com/server/362361/vote/');
+    </script>
 </head>
 <body>
 
-    <!-- Backdrop -->
-    <div class="abyss"></div>
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="bubbles" id="bubbleField"></div>
-
-    <div class="container">
-        <div class="vote-card glass">
-
-            <!-- Logo -->
-            <div class="logo-wrap">
-                <div class="logo-icon">
-                    <img src="https://www.maynat.eu/images/logo.png" alt="MAYNAT Logo" />
-                </div>
-            </div>
-
-            <h1>Votează <span class="accent">MAYNAT</span></h1>
-            <p class="subtitle">Susține serverul – redirecționare în 1 secundă</p>
-
-            <!-- Timer / Progress -->
-            <div class="timer-wrap">
-                <div class="timer-bar-bg">
-                    <div class="timer-bar" id="timerBar" style="width:100%"></div>
-                </div>
-                <div class="timer-text" id="timerText">
-                    Redirecționare în <strong id="countdownNum">1</strong> secundă...
-                </div>
-            </div>
-
-            <!-- Link + Copy -->
-            <div class="vote-link-box">
-                <span class="link-text" id="voteLinkDisplay">https://minecraft-mp.com/server/362361/vote/</span>
-                <button class="btn-copy" id="copyVoteBtn"><i class="fas fa-copy"></i> Copiază</button>
-            </div>
-
-            <!-- Butoane -->
-            <div class="btn-group">
-                <a href="https://minecraft-mp.com/server/362361/vote/" target="_blank" class="btn btn-primary" id="voteNowBtn">
-                    <i class="fas fa-arrow-right"></i> Votează acum
-                </a>
-            </div>
-
-            <!-- Mesaj de rezervă (fallback) -->
-            <div class="fallback-message" id="fallbackMessage">
-                Dacă nu ai fost trimis unde trebuie, <a href="https://minecraft-mp.com/server/362361/vote/" target="_blank">apasă aici</a>!
-            </div>
-
-            <div class="foot-note">
-                <i class="fas fa-shield-alt" style="opacity:0.4;margin-right:4px;"></i>
-                Fiecare vot contează — <a href="https://maynat.eu">maynat.eu</a>
-            </div>
-        </div>
+    <div class="box">
+        <div class="spinner"></div>
+        <img src="https://www.maynat.eu/images/logo.png" alt="MAYNAT" class="logo" />
+        <h1>Te redirecționăm...</h1>
+        <p>Dacă nu ai fost trimis unde trebuie, apasă butonul de mai jos.</p>
+        <a href="https://minecraft-mp.com/server/362361/vote/" class="btn">Votează acum</a>
     </div>
-
-    <!-- TOAST -->
-    <div class="toast" id="toast">
-        <span class="toast-icon" id="toastIcon">✅</span>
-        <span class="toast-msg" id="toastMsg">Copiat!</span>
-        <button class="toast-close" id="toastClose">&times;</button>
-        <div class="toast-progress" id="toastProgress"></div>
-    </div>
-
-    <script>
-        (function() {
-            'use strict';
-
-            // ============================================================
-            // 1. BUBBLES
-            // ============================================================
-            const bubbleField = document.getElementById('bubbleField');
-            for (let i = 0; i < 14; i++) {
-                const b = document.createElement('div');
-                b.className = 'bubble';
-                const size = 6 + Math.random() * 20;
-                b.style.width = size + 'px';
-                b.style.height = size + 'px';
-                b.style.left = Math.random() * 100 + '%';
-                const dur = 10 + Math.random() * 14;
-                b.style.animationDuration = dur + 's';
-                b.style.animationDelay = (-Math.random() * dur) + 's';
-                bubbleField.appendChild(b);
-            }
-
-            // ============================================================
-            // 2. CONFIG
-            // ============================================================
-            const VOTE_URL = 'https://minecraft-mp.com/server/362361/vote/';
-            const REDIRECT_DELAY = 1; // secundă
-
-            // Elemente
-            const timerBar = document.getElementById('timerBar');
-            const countdownNum = document.getElementById('countdownNum');
-            const timerText = document.getElementById('timerText');
-            const copyBtn = document.getElementById('copyVoteBtn');
-            const voteLinkDisplay = document.getElementById('voteLinkDisplay');
-            const fallbackMessage = document.getElementById('fallbackMessage');
-
-            voteLinkDisplay.textContent = VOTE_URL;
-
-            // ============================================================
-            // 3. TOAST
-            // ============================================================
-            let toastTimeout = null;
-
-            function showToast(msg, icon) {
-                const toast = document.getElementById('toast');
-                const iconEl = document.getElementById('toastIcon');
-                const msgEl = document.getElementById('toastMsg');
-                const progress = document.getElementById('toastProgress');
-
-                iconEl.textContent = icon || '✅';
-                msgEl.textContent = msg;
-
-                progress.style.animation = 'none';
-                void progress.offsetWidth;
-                progress.style.animation = 'shrink 3s linear forwards';
-
-                toast.classList.add('show');
-
-                if (toastTimeout) clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-
-            document.getElementById('toastClose').addEventListener('click', function() {
-                const toast = document.getElementById('toast');
-                toast.classList.remove('show');
-                if (toastTimeout) clearTimeout(toastTimeout);
-            });
-
-            // ============================================================
-            // 4. COPY
-            // ============================================================
-            copyBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText(VOTE_URL).then(() => {
-                    showToast('Link copiat!', '📋');
-                }).catch(() => {
-                    const ta = document.createElement('textarea');
-                    ta.value = VOTE_URL;
-                    document.body.appendChild(ta);
-                    ta.select();
-                    try {
-                        document.execCommand('copy');
-                        showToast('Link copiat!', '📋');
-                    } catch {
-                        showToast('Nu s-a putut copia.', '❌');
-                    }
-                    document.body.removeChild(ta);
-                });
-            });
-
-            // ============================================================
-            // 5. TIMER + REDIRECT + FALLBACK
-            // ============================================================
-            let countdown = REDIRECT_DELAY;
-            let redirectAttempted = false;
-
-            function updateTimerUI() {
-                const progress = (countdown / REDIRECT_DELAY) * 100;
-                timerBar.style.width = progress + '%';
-                countdownNum.textContent = Math.ceil(countdown);
-
-                if (countdown <= 0) {
-                    timerBar.style.width = '0%';
-                    timerText.innerHTML = 'Redirecționare... <strong style="color:var(--gold);">acum!</strong>';
-                } else {
-                    timerText.innerHTML =
-                        `Redirecționare în <strong id="countdownNum">${Math.ceil(countdown)}</strong> secundă...`;
-                }
-            }
-
-            function attemptRedirect() {
-                if (redirectAttempted) return;
-                redirectAttempted = true;
-
-                // Încearcă redirecționarea
-                window.location.href = VOTE_URL;
-
-                // Dacă redirecționarea eșuează (ex: pop-up blocker, extensie),
-                // afișează mesajul de rezervă după 2 secunde
-                setTimeout(function() {
-                    // Verifică dacă încă suntem pe pagină
-                    // (dacă redirecționarea a funcționat, acest cod nu se va executa)
-                    if (document.visibilityState === 'visible') {
-                        fallbackMessage.style.display = 'block';
-                    }
-                }, 2000);
-            }
-
-            function startTimer() {
-                countdown = REDIRECT_DELAY;
-                updateTimerUI();
-
-                const interval = setInterval(() => {
-                    countdown -= 0.1;
-                    if (countdown <= 0) {
-                        countdown = 0;
-                        updateTimerUI();
-                        clearInterval(interval);
-                        setTimeout(attemptRedirect, 200);
-                    } else {
-                        updateTimerUI();
-                    }
-                }, 100);
-            }
-
-            startTimer();
-
-            // ============================================================
-            // 6. SMOOTH SCROLL
-            // ============================================================
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', function(e) {
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-
-            console.log('🌊 MAYNAT · Vote — redirecționare după ' + REDIRECT_DELAY + 's, fallback activ');
-
-        })();
-    </script>
 
 </body>
 </html>
